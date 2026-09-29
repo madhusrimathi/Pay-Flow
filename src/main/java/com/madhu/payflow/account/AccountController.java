@@ -13,7 +13,7 @@ public class AccountController {
     private final AccountRepository accounts;
     public AccountController(AccountRepository accounts) { this.accounts = accounts; }
 
-    public record CreateAccount(@NotBlank String name, @Pattern(regexp = "SGD", message = "Only SGD is supported in V1") String currency,
+    public record CreateAccount(@NotBlank String name, @Pattern(regexp = "SGD", message = "Only SGD is supported") String currency,
                                 @jakarta.validation.constraints.DecimalMin("0.00") @jakarta.validation.constraints.Digits(integer = 10, fraction = 2) java.math.BigDecimal openingBalance) {}
     public record AccountView(Long id, String name, String currency, java.math.BigDecimal balance) {
         public static AccountView of(Account a) { return new AccountView(a.getId(), a.getName(), a.getCurrency(), a.getBalance()); }
